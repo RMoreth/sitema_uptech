@@ -1,5 +1,5 @@
 import customtkinter as ctk
-from modules.login_screen import LoginScreen
+from modules.menu_screen import Menu
 import os
 import sqlite3
 
@@ -34,6 +34,7 @@ class App(ctk.CTk):
         self.content_frame.grid(row=0, column=1, columnspan=4, sticky="nsew")
 
         self.set_home()
+        self.set_menu()
 
     def inicializar_banco(self):
         """Inicializa o banco de dados SQLite."""
@@ -72,12 +73,8 @@ class App(ctk.CTk):
             widget.destroy()
 
     def set_menu(self):
-        """Exibe o menu no frame de conteúdo."""
-        self.btn_home = ctk.CTkButton(
-            self.menu_frame,
-            text="Home",
-        )
-        self.btn_home.pack(pady=10, padx=10)
+        """Exibe o menu no frame de menu."""
+        self.menu = Menu(self.menu_frame)
 
     def set_home(self):
         """Exibe a tela inicial no framde de conteúdo."""
