@@ -25,16 +25,18 @@ class App(ctk.CTk):
         self.set_base_layout()
 
         # Frame do menu
-        self.menu_frame = ctk.CTkFrame(self, width=200)
-        self.menu_frame.grid(row=0, column=0, sticky="ns")
-        self.menu_frame.grid_propagate(False)  # Impede que o frame se expanda
+        self.menu_frame = Menu(self)
+
+        # Frame divisoria
+
+        self.divisoria = ctk.CTkFrame(self, width=2, fg_color="red")
+        self.divisoria.grid(row=0, column=1, sticky="ns")
 
         # Frame de conteudo
         self.content_frame = ctk.CTkFrame(self)
-        self.content_frame.grid(row=0, column=1, columnspan=4, sticky="nsew")
+        self.content_frame.grid(row=0, column=2, columnspan=4, sticky="nsew")
 
         self.set_home()
-        self.set_menu()
 
     def inicializar_banco(self):
         """Inicializa o banco de dados SQLite."""
@@ -55,7 +57,7 @@ class App(ctk.CTk):
         """Define o layout básico da janela."""
         self.grid_rowconfigure(0, weight=1)  # Permite que a linha 0 se expanda
         self.grid_columnconfigure(0, weight=1)  # Coluna do menu
-        self.grid_columnconfigure(1, weight=4)  # Colunas do conteúdo
+        self.grid_columnconfigure(1, weight=0)  # Colunas do conteúdo
         self.grid_columnconfigure(2, weight=4)
         self.grid_columnconfigure(3, weight=4)
         self.grid_columnconfigure(4, weight=4)
@@ -71,10 +73,6 @@ class App(ctk.CTk):
         """remove todos os widgets do frame de conteúdo."""
         for widget in self.content_frame.winfo_children():
             widget.destroy()
-
-    def set_menu(self):
-        """Exibe o menu no frame de menu."""
-        self.menu = Menu(self.menu_frame)
 
     def set_home(self):
         """Exibe a tela inicial no framde de conteúdo."""
