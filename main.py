@@ -1,5 +1,6 @@
 import customtkinter as ctk
 from modules.menu_screen import Menu
+from modules.OS_screen import OSclass
 import os
 import sqlite3
 
@@ -25,7 +26,14 @@ class App(ctk.CTk):
         self.set_base_layout()
 
         # Frame do menu
-        self.menu_frame = Menu(self)
+        self.menu_frame = Menu(
+            self,
+            os=self.set_OS,
+            clientes=None,
+            estoque=None,
+            financeiro=None,
+            relatorios=None,
+        )
 
         # Frame divisoria
 
@@ -80,6 +88,12 @@ class App(ctk.CTk):
         label = ctk.CTkLabel(self.content_frame,
                              text="Bem-vindo ao sistema de oficina!")
         label.pack(pady=20, padx=20)
+
+    def set_OS(self):
+        """Exibe a tela de ordem de serviço no frame de conteúdo."""
+        self.clear_content_frame()
+        os_screen = OSclass(self.content_frame)
+        os_screen.pack(fill="both", expand=True)
 
 
 if __name__ == "__main__":

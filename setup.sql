@@ -27,15 +27,20 @@ CREATE TABLE IF NOT EXISTS equipamento (
 );
 
 -- Tabela de ordens de serviço
-CREATE TABLE IF NOT EXISTS ordem_servico (
+
+CREATE TABLE if NOT EXISTS ordens_de_servico (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    cliente_id INTEGER NOT NULL,
-    equipamento_id INTEGER NOT NULL,
-    data_entrada TEXT NOT NULL,
-    status TEXT NOT NULL CHECK(status IN ('pendente', 'em andamento', 'concluída')),
+    nome_cliente TEXT NOT NULL,
+    telefone_cliente TEXT NOT NULL,
+    marca_aparelho TEXT NOT NULL,
+    modelo_aparelho TEXT NOT NULL,
     descricao_problema TEXT,
-    solucao TEXT,
-    valor DECIMAL(10, 2),
-    FOREIGN KEY (cliente_id) REFERENCES cliente(id),
-    FOREIGN KEY (equipamento_id) REFERENCES equipamento(id)
+    diagnostico TEXT NOT NULL,
+    valor_servico REAL NOT NULL,
+    valor_pecas REAL NOT NULL,
+    status TEXT NOT NULL CHECK(status IN ('pendente', 'em andamento', 'concluída')),
+    data_criacao TEXT NOT NULL,
+    data_finalizacao TEXT,
+    observacoes TEXT
 );
+
