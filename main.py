@@ -42,7 +42,7 @@ class App(ctk.CTk):
 
         # Frame de conteudo
         self.content_frame = ctk.CTkFrame(self)
-        self.content_frame.grid(row=0, column=2, columnspan=4, sticky="nsew")
+        self.content_frame.grid(row=0, column=2, columnspan=10, sticky="nsew")
 
         self.set_home()
 
@@ -66,9 +66,7 @@ class App(ctk.CTk):
         self.grid_rowconfigure(0, weight=1)  # Permite que a linha 0 se expanda
         self.grid_columnconfigure(0, weight=1)  # Coluna do menu
         self.grid_columnconfigure(1, weight=0)  # Colunas do conteúdo
-        self.grid_columnconfigure(2, weight=4)
-        self.grid_columnconfigure(3, weight=4)
-        self.grid_columnconfigure(4, weight=4)
+        self.grid_columnconfigure((2, 3, 4, 5, 6, 7, 8, 9, 10), weight=10)
 
     def mudar_titulo(self, novo: str):
         """Muda o título da janela.

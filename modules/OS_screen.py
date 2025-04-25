@@ -1,7 +1,5 @@
 import customtkinter as ctk
-
-
-import customtkinter as ctk
+from tkinter import ttk
 
 
 class OSclass(ctk.CTkFrame):
@@ -9,41 +7,58 @@ class OSclass(ctk.CTkFrame):
         super().__init__(master)
         self.master = master
         self.grid(row=0, column=0, sticky="nsew")
+        self.set_layout()
 
-        # Configuração do layout
-        self.grid_rowconfigure(1, weight=1)  # Tabela ocupa o espaço vertical
-        # Tabela ocupa o espaço horizontal
-        self.grid_columnconfigure(0, weight=1)
+    def set_layout(self):
+        """Configura o layout da tela de OS."""
+        self.grid_rowconfigure(
+            (0, 1), weight=0)  # Linha da Treeview não se expande
+        # Colunas se expandem igualmente
+        self.grid_columnconfigure((0, 1, 2), weight=1)
+        self.configure(fg_color="white")
 
-        # Cabeçalho
-        self.header_frame = ctk.CTkFrame(self, fg_color="lightgray")
-        self.header_frame.grid(row=0, column=0, sticky="ew", padx=10, pady=10)
-        self.header_frame.grid_columnconfigure(1, weight=1)
+        # Label
+        self.label_OS = ctk.CTkLabel(
+            self,
+            text="Ordens de Serviço",
+            font=("Arial", 30, "bold"),
+        )
+        self.label_OS.grid(row=0, column=0, columnspan=3, pady=10, sticky="ew")
 
-        self.btn_nova_ordem = ctk.CTkButton(
-            self.header_frame, text="Nova Ordem")
-        self.btn_nova_ordem.grid(row=0, column=0, padx=10, pady=5)
+        # Frame para Treeview
+        self.frame_abertas = ctk.CTkFrame(
+            self, width=300, height=200)  # Tamanho fixo
+        self.frame_abertas.grid(
+            row=1, column=0, padx=10, pady=10, sticky="nsew")
+        # Impede que o frame se expanda
+        self.frame_abertas.grid_propagate(False)
 
-        self.entry_busca = ctk.CTkEntry(
-            self.header_frame, placeholder_text="Buscar...")
-        self.entry_busca.grid(row=0, column=1, padx=10, pady=5, sticky="ew")
+        # Barra de rolagem para Treeview
+        self.scrollbar = ttk.Scrollbar(self.frame_abertas, orient="vertical")
+        self.scrollbar.pack(side="right", fill="y")
 
-        # Tabela de ordens de serviço
-        self.tabela_frame = ctk.CTkFrame(self)
-        self.tabela_frame.grid(
-            row=1, column=0, sticky="nsew", padx=10, pady=10)
+        # Treeview
+        self.Lista_OS_aberta = ttk.Treeview(
+            self.frame_abertas,
+            columns=("ID", "Cliente", "Data Abertura", "Status"),
+            show="headings",
+            yscrollcommand=self.scrollbar.set,  # Conecta a barra de rolagem
+        )
+        self.Lista_OS_aberta.heading("ID", text="ID")
+        self.Lista_OS_aberta.heading("Cliente", text="Cliente")
+        self.Lista_OS_aberta.heading("Data Abertura", text="Data Abertura")
+        self.Lista_OS_aberta.heading("Status", text="Status")
+        self.Lista_OS_aberta.pack(fill="both", expand=True, padx=5, pady=5)
 
-        self.tabela = ctk.CTkLabel(
-            self.tabela_frame, text="Tabela de Ordens de Serviço (Exemplo)")
-        self.tabela.pack(fill="both", expand=True, padx=10, pady=10)
+        # Configura a rolagem
+        self.scrollbar.config(command=self.Lista_OS_aberta.yview)
 
-        # Detalhes da ordem de serviço
-        self.detalhes_frame = ctk.CTkFrame(self, fg_color="white")
-        self.detalhes_frame.grid(
-            row=1, column=1, sticky="nsew", padx=10, pady=10)
-        self.detalhes_frame.grid_rowconfigure(0, weight=1)
-        self.detalhes_frame.grid_columnconfigure(0, weight=1)
+        # Frame de detalhes
+        self.frame_detalhes = ctk.CTkFrame(self, width=300, height=200)
+        self.frame_detalhes.grid(
+            row=1, column=1, padx=10, pady=10, sticky="nsew")
 
-        self.detalhes_label = ctk.CTkLabel(
-            self.detalhes_frame, text="Detalhes da Ordem de Serviço")
-        self.detalhes_label.pack(fill="both", expand=True, padx=10, pady=10)
+        # Frame de pendentes
+        self.frame_pendentes = ctk.CTkFrame(self, width=300, height=200)
+        self.frame_pendentes.grid(
+            row=1, column=2, padx=10, pady=10, sticky="nsew")
