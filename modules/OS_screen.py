@@ -14,7 +14,7 @@ class OSclass(ctk.CTkFrame):
         # Configuração do layout interno
         self.grid_rowconfigure(0, weight=0)  # Linha do título não se expande
         # Linha dos frames se expande
-        self.grid_rowconfigure((1, 2, 3, 4, 5, 6), weight=1)
+        self.grid_rowconfigure((1, 2, 3, 4, 5, 6, 7, 8, 9), weight=1)
         # Colunas se expandem igualmente
         self.grid_columnconfigure((0, 1, 2, 3), weight=1)
         self.configure(fg_color="white")
@@ -30,7 +30,7 @@ class OSclass(ctk.CTkFrame):
         # Frame para Treeview (Ordens Abertas)
         self.frame_abertas = ctk.CTkFrame(self)
         self.frame_abertas.grid(
-            row=1, column=0, padx=10, pady=10, sticky="nsew", rowspan=3)
+            row=1, column=0, padx=10, pady=10, sticky="nsew", rowspan=6)
         self.frame_abertas.grid_rowconfigure(
             0, weight=1)  # Permite expansão vertical
         self.frame_abertas.grid_columnconfigure(
@@ -74,21 +74,121 @@ class OSclass(ctk.CTkFrame):
             pady=10,
             sticky="nsew",
             columnspan=2,
-            rowspan=5
+            rowspan=8
         )
+        self.frame_detalhes.grid_rowconfigure((0, 1, 2, 3, 4, 5), weight=1)
+        self.frame_detalhes.grid_columnconfigure(
+            (0, 1, 2, 3, 4, 5, 6), weight=1)
+        self.lb_numero_os = ctk.CTkLabel(
+            self.frame_detalhes,
+            text="Número da OS",
+            font=("Arial", 14, "bold"),
+        )
+        self.lb_numero_os.grid(
+            row=0,
+            column=0,
+            padx=5,
+            pady=5,
+            sticky="w",
+        )
+        self.en_numero_os = ctk.CTkEntry(
+            self.frame_detalhes,
+            placeholder_text="Número da OS",
+        )
+        self.en_numero_os.grid(
+            row=0,
+            column=1,
+            padx=5,
+            pady=5,
+            sticky="w",
+        )
+
+        self.lb_status = ctk.CTkLabel(
+            self.frame_detalhes,
+            text="Status",
+            font=("Arial", 14, "bold"),
+        )
+        self.lb_status.grid(
+            row=0,
+            column=2,
+            padx=5,
+            pady=5,
+            sticky="w",
+        )
+
+        self.en_status = ctk.CTkEntry(
+            self.frame_detalhes,
+            placeholder_text="Status",
+        )
+        self.en_status.grid(
+            row=0,
+            column=3,
+            padx=5,
+            pady=5,
+            sticky="w",
+        )
+
+        self.lb_nome_cliente = ctk.CTkLabel(
+            self.frame_detalhes,
+            text="Nome do Cliente",
+            font=("Arial", 14, "bold"),
+        )
+        self.lb_nome_cliente.grid(
+            row=1,
+            column=0,
+            padx=5,
+            pady=5,
+            sticky="w",
+        )
+        self.en_nome_cliente = ctk.CTkEntry(
+            self.frame_detalhes,
+            placeholder_text="Nome do Cliente",
+        )
+        self.en_nome_cliente.grid(
+            row=1,
+            column=1,
+            padx=5,
+            pady=5,
+            sticky="w",
+        )
+
+        self.lb_equip = ctk.CTkLabel(
+            self.frame_detalhes,
+            text="Equipamento",
+            font=("Arial", 14, "bold"),
+        )
+        self.lb_equip.grid(
+            row=2,
+            column=0,
+            padx=5,
+            pady=5,
+            sticky="w",
+        )
+        self.en_equip = ctk.CTkEntry(
+            self.frame_detalhes,
+            placeholder_text="Equipamento",
+        )
+        self.en_equip.grid(
+            row=2,
+            column=1,
+            padx=5,
+            pady=5,
+            sticky="w",
+        )
+
         self.frame_detalhes.grid_rowconfigure(0, weight=1)
         self.frame_detalhes.grid_columnconfigure(0, weight=1)
 
         # Frame de pendentes
         self.frame_pendentes = ctk.CTkFrame(self)
         self.frame_pendentes.grid(
-            row=1, column=3, padx=10, pady=10, sticky="nsew", rowspan=3)
+            row=1, column=3, padx=10, pady=10, sticky="nsew", rowspan=6)
         self.frame_pendentes.grid_rowconfigure(0, weight=1)
         self.frame_pendentes.grid_columnconfigure(0, weight=1)
 
         self.frame_botoes = ctk.CTkFrame(self)
         self.frame_botoes.grid(
-            row=6, column=0, padx=10, pady=10, sticky="nsew", columnspan=4)
+            row=9, column=0, padx=10, pady=10, sticky="nsew", columnspan=4)
         self.frame_botoes.grid_rowconfigure(0, weight=1)
         self.frame_botoes.grid_columnconfigure((0, 1, 2, 3, 4), weight=1)
 
