@@ -7,7 +7,6 @@ class OSclass(ctk.CTkFrame):
     def __init__(self, master):
         super().__init__(master)
         self.master = master
-        self.grid(row=0, column=0, sticky="nsew")
         self.set_layout()
 
     def set_layout(self):
@@ -15,9 +14,9 @@ class OSclass(ctk.CTkFrame):
         # Configuração do layout interno
         self.grid_rowconfigure(0, weight=0)  # Linha do título não se expande
         # Linha dos frames se expande
-        self.grid_rowconfigure((1, 2, 3, 4, 5, 6, 7, 8, 9), weight=1)
+        self.grid_rowconfigure((1, 2), weight=1)
         # Colunas se expandem igualmente
-        self.grid_columnconfigure((0, 1, 2, 3), weight=1)
+        self.grid_columnconfigure((0, 1, 2), weight=1)
         self.configure(fg_color="white")
 
         # Label do título
@@ -26,12 +25,12 @@ class OSclass(ctk.CTkFrame):
             text="Ordens de Serviço",
             font=("Arial", 30, "bold"),
         )
-        self.label_OS.grid(row=0, column=0, columnspan=4, pady=10, sticky="ew")
+        self.label_OS.grid(row=0, column=1, pady=10, sticky="ew")
 
         # Frame para Treeview (Ordens Abertas)
         self.frame_abertas = ctk.CTkFrame(self)
         self.frame_abertas.grid(
-            row=1, column=0, padx=10, pady=10, sticky="nsew", rowspan=6)
+            row=1, column=0, padx=10, pady=10, sticky="nsew", )
         self.frame_abertas.grid_rowconfigure(
             0, weight=1)  # Permite expansão vertical
         self.frame_abertas.grid_columnconfigure(
@@ -73,9 +72,7 @@ class OSclass(ctk.CTkFrame):
             column=1,
             padx=10,
             pady=10,
-            sticky="nsew",
-            columnspan=2,
-            rowspan=8
+            sticky="n",
         )
         self.frame_detalhes.grid_rowconfigure(
             (0, 1, 2,),
@@ -105,8 +102,7 @@ class OSclass(ctk.CTkFrame):
             column=0,
             padx=10,
             pady=10,
-            sticky="w",
-            columnspan=4,
+            sticky="n"
         )
 
         self.subframe_cliente.grid_rowconfigure(
@@ -114,27 +110,26 @@ class OSclass(ctk.CTkFrame):
             weight=0,
         )
         self.subframe_cliente.grid_rowconfigure(
-            (1, 2),
+            (1, 2,),
             weight=1,
         )
 
         self.subframe_cliente.grid_columnconfigure(
             0,
-            weight=0,
+            weight=1,
         )
         self.subframe_cliente.grid_columnconfigure(
             1,
-            weight=0,
+            weight=1,
         )
         self.subframe_cliente.grid_columnconfigure(
             2,
-            weight=0,
+            weight=1,
         )
         self.subframe_cliente.grid_columnconfigure(
             3,
-            weight=0,
+            weight=1,
         )
-
         self.lb_dados_cliente = ctk.CTkLabel(
             self.subframe_cliente,
             text="Dados do Cliente",
@@ -163,7 +158,6 @@ class OSclass(ctk.CTkFrame):
             self.subframe_cliente,
             placeholder_text="Nome do Cliente",
             font=("Arial", 10),
-            width=180
         )
         self.en_nome_cliente.grid(
             row=1,
@@ -190,7 +184,6 @@ class OSclass(ctk.CTkFrame):
         self.en_telefone = ctk.CTkEntry(
             self.subframe_cliente,
             placeholder_text="Telefone",
-            width=100,
             font=("Arial", 10),
         )
         self.en_telefone.grid(
@@ -200,7 +193,6 @@ class OSclass(ctk.CTkFrame):
             pady=2,
             sticky="w"
         )
-        self.en_telefone.grid_propagate(False)
 
         self.lb_email = ctk.CTkLabel(
             self.subframe_cliente,
@@ -219,12 +211,38 @@ class OSclass(ctk.CTkFrame):
             self.subframe_cliente,
             placeholder_text="Email",
             font=("Arial", 10),
-            width=180
         )
 
         self.en_email.grid(
             row=2,
             column=1,
+            padx=2,
+            pady=2,
+            sticky="w"
+        )
+
+        self.lb_cpf = ctk.CTkLabel(
+            self.subframe_cliente,
+            text="CPF/CNPJ",
+            font=("Arial", 10, "bold"),
+        )
+
+        self.lb_cpf.grid(
+            row=2,
+            column=2,
+            padx=2,
+            pady=2,
+            sticky="w"
+        )
+
+        self.en_cpf = ctk.CTkEntry(
+            self.subframe_cliente,
+            placeholder_text="CPF/CNPJ",
+            font=("Arial", 10),
+        )
+        self.en_cpf.grid(
+            row=2,
+            column=3,
             padx=2,
             pady=2,
             sticky="w"
@@ -236,7 +254,6 @@ class OSclass(ctk.CTkFrame):
             column=0,
             padx=1,
             pady=11,
-            sticky="ew",
             columnspan=4,
         )
         self.subframe_dispositivo.grid_rowconfigure(
@@ -246,16 +263,11 @@ class OSclass(ctk.CTkFrame):
 
         self.subframe_dispositivo.grid_rowconfigure(
             (1, 2),
-            weight=0,
+            weight=1,
         )
         self.subframe_dispositivo.grid_columnconfigure(
-            (0, 2),
-            weight=0,
-        )
-
-        self.subframe_dispositivo.grid_columnconfigure(
-            (1, 3),
-            weight=0,
+            (0, 1, 2, 3),
+            weight=1,
         )
 
         self.label_dispositivo = ctk.CTkLabel(
@@ -288,7 +300,6 @@ class OSclass(ctk.CTkFrame):
             self.subframe_dispositivo,
             placeholder_text="Tipo",
             font=("Arial", 10),
-            width=50
         )
         self.en_tipo.grid(
             row=1,
@@ -336,10 +347,10 @@ class OSclass(ctk.CTkFrame):
             sticky="w"
         )
 
-        self.en_acessorios = ctk.CTkTextbox(
+        self.en_acessorios = ctk.CTkEntry(
             self.subframe_dispositivo,
-            width=100,
-            height=150,
+            placeholder_text="Acessórios",
+            font=("Arial", 10),
         )
         self.en_acessorios.grid(
             row=2,
@@ -379,8 +390,6 @@ class OSclass(ctk.CTkFrame):
 
         self.en_descricao = ctk.CTkTextbox(
             self.frame_detalhes,
-            width=200,
-            height=100,
         )
 
         self.lb_equip = ctk.CTkLabel(
@@ -402,17 +411,15 @@ class OSclass(ctk.CTkFrame):
 
         self.en_data_abertura = DateEntry(
             self.frame_detalhes,
-            width=12,
             background="darkblue",
             foreground="white",
-            borderwidth=2,
             date_pattern="dd/mm/yyyy",
         )
 
         # Frame de pendentes
         self.frame_pendentes = ctk.CTkFrame(self)
         self.frame_pendentes.grid(
-            row=1, column=3, padx=10, pady=10, sticky="nsew", rowspan=6)
+            row=1, column=2, padx=10, pady=10, sticky="nsew",)
         self.frame_pendentes.grid_rowconfigure(0, weight=1)
         self.frame_pendentes.grid_columnconfigure(0, weight=1)
 
@@ -447,7 +454,7 @@ class OSclass(ctk.CTkFrame):
 
         self.frame_botoes = ctk.CTkFrame(self)
         self.frame_botoes.grid(
-            row=9, column=0, padx=10, pady=10, sticky="nsew", columnspan=4)
+            row=2, column=0, padx=10, pady=10, sticky="nsew", columnspan=3)
         self.frame_botoes.grid_rowconfigure(0, weight=1)
         self.frame_botoes.grid_columnconfigure((0, 1, 2, 3, 4), weight=1)
 
