@@ -9,7 +9,16 @@ class Menu(ctk.CTkFrame):
         master: Janela principal do aplicativo.
     """
 
-    def __init__(self, master,  os, clientes, estoque, financeiro, relatorios):
+    def __init__(
+            self,
+            master,
+            home,
+            os,
+            clientes,
+            estoque,
+            financeiro,
+            relatorios
+    ):
         super().__init__(master)
         self.master = master
         self.grid(row=0, column=0, sticky="nsew")
@@ -35,8 +44,14 @@ class Menu(ctk.CTkFrame):
         self.logo = ctk.CTkImage(Image.open("images/Logo.png"), size=(70, 70))
 
         # Logo do menu
-        self.logo_label = ctk.CTkLabel(
-            self, text="", image=self.logo, fg_color="transparent")
+        self.logo_label = ctk.CTkButton(
+            self, text="",
+            image=self.logo,
+            fg_color="transparent",
+            border_spacing=0,
+            width=80,
+            command=home
+        )
         self.logo_label.grid(row=0, column=0, pady=10, padx=0)
 
         # Botões do menu

@@ -1,4 +1,20 @@
 {
+    // Caminho do interpretador Python do seu venv
     "python.defaultInterpreterPath": "e:/pythonEstudo/projetinhos/UP-tech sistema/sitema_uptech/venv/Scripts/python.exe",
-    "mypy.dmypyExecutable": "e:/pythonEstudo/projetinhos/UP-tech sistema/sitema_uptech/venv/Scripts/dmypy.exe"
+    // Formatação automática (opcional, mas recomendado)
+    "editor.formatOnSave": true,
+    "python.formatter.black.enabled": true,
+    "python.formatter.provider": "black",
+    // Linting (análise de código, recomendado)
+    "python.linting.enabled": true,
+    "python.linting.flake8Enabled": true,
+    "python.linting.pylintEnabled": false,
+    // Mypy (opcional, se quiser tipagem, mas pode desativar se der problemas)
+    "mypy.enabled": false,
+    // Exibir números de linha (opcional)
+    "editor.lineNumbers": "on",
+    // Espaços em vez de tabs (opcional)
+    "editor.insertSpaces": true,
+    "editor.tabSize": 4,
+    "mypy.runUsingActiveInterpreter": true
 }

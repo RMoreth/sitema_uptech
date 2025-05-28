@@ -28,6 +28,7 @@ class App(ctk.CTk):
         # Frame do menu
         self.menu_frame = Menu(
             self,
+            home=self.set_home,
             os=self.set_OS,
             clientes=None,
             estoque=None,
@@ -42,7 +43,9 @@ class App(ctk.CTk):
 
         # Frame de conteudo
         self.content_frame = ctk.CTkFrame(self)
-        self.content_frame.grid(row=0, column=2, columnspan=10, sticky="nsew")
+        self.content_frame.grid(row=0, column=2, columnspan=12, sticky="nsew")
+        self.content_frame.grid_rowconfigure(0, weight=1)
+        self.content_frame.grid_columnconfigure(0, weight=1)
 
         self.set_home()
 
@@ -64,9 +67,15 @@ class App(ctk.CTk):
     def set_base_layout(self):
         """Define o layout básico da janela."""
         self.grid_rowconfigure(0, weight=1)  # Permite que a linha 0 se expanda
-        self.grid_columnconfigure(0, weight=1)  # Coluna do menu
-        self.grid_columnconfigure(1, weight=0)  # Colunas do conteúdo
-        self.grid_columnconfigure((2, 3, 4, 5, 6, 7, 8, 9, 10), weight=10)
+        self.grid_columnconfigure(
+            0, weight=1, uniform="equal")  # Coluna do menu
+        self.grid_columnconfigure(1, weight=0)
+        self.grid_columnconfigure(
+            (2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13),
+            weight=1,
+            uniform="equal",
+
+        )
 
     def mudar_titulo(self, novo: str):
         """Muda o título da janela.
@@ -85,13 +94,14 @@ class App(ctk.CTk):
         self.clear_content_frame()
         label = ctk.CTkLabel(self.content_frame,
                              text="Bem-vindo ao sistema de oficina!")
-        label.pack(pady=20, padx=20)
+        label.grid(row=0, column=0,
+                   sticky="ew", columnspan=12)
 
     def set_OS(self):
         """Exibe a tela de ordem de serviço no frame de conteúdo."""
         self.clear_content_frame()
         os_screen = OSclass(self.content_frame)
-        os_screen.pack(fill="both", expand=True)
+        os_screen.grid(row=0, column=0, sticky="nsew")
 
 
 if __name__ == "__main__":
